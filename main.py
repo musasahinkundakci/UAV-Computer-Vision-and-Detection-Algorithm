@@ -4,14 +4,12 @@ import glob
 import pandas as pd
 import numpy as np
 model = torch.hub.load('./yolov5-master','custom', path='./pt/best.pt',force_reload=True,source="local")
-
 img = './images/*' 
 ext = ['png', 'jpg','jpeg']
 files = []
 imdir = './images/'
 [files.extend(glob.glob(imdir + '*.' + e)) for e in ext]
 images = [cv2.imread(file) for file in files]
-
 a=1
 for i in images:
     print("Image"+str(a))
@@ -43,6 +41,5 @@ for i in images:
     cv2.putText(i,"{} object detected!".format(len(predictions)),(20,20),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),1,cv2.LINE_AA)
     cv2.imshow(str(a),i)
     print("\n\n")
-
 cv2.waitKey(0)
 cv2.destroyAllWindows()
